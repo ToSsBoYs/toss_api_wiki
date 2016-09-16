@@ -1,0 +1,23 @@
+<aside id="left_scroll" style="overflow: scroll;overflow-x:hidden" class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <volist id="left" name="left_data">
+                <li class="treeview active">
+                    <span style="color: #000;background: #f4f4f5;font-weight: 600;border-left: 3px solid transparent;position: relative;padding: 12px 5px 12px 15px;display: block;" >
+                        <span>{$key}</span>
+                        <i class="fa fa-angle-double-down pull-right"></i>
+                    </span>
+                    <ul class="treeview-menu">
+                        <volist id="wiki_left" name="left['project_api']">
+                            <li <if condition="$project_api_id eq $wiki_left.id">class="active"</if>><a href="{:url('project/show',['project_module_id'=>$project_module_id,'project_id'=>$project_id,'project_api_id'=>$wiki_left['id']])}"><i class="fa fa-circle-o"></i>{$wiki_left.api_name}</a></li>
+                        </volist>
+                    </ul>
+                </li>
+            </volist>
+        </ul><!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

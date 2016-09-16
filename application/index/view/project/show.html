@@ -1,0 +1,152 @@
+<extend name="common@public:base_view_second" ></extend>
+<block name="body">
+    <notempty name='project_api_id'>
+    <div class="col-md-12">
+        <!-- Horizontal Form -->
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">接口详情</h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            <style>
+                .input-group-btn label{
+                    width: 150px;
+                }
+            </style>
+            <form action="{:url('Project/show')}" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+                <input type="hidden" name="project_api_id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+                <input type="hidden" name="project_id" value="{$project_id}">
+                <input type="hidden" name="project_module_id" value="{$project_module_id}">
+                <div class="box-body">
+                    <!-- text input -->
+                    <div class="input-group margin">
+                        <div class="input-group-btn">
+                            <label class="btn btn-default">接口名称</label>
+                        </div>
+                        <!-- /btn-group -->
+                        <input  value="{$project_api_data.api_name}" type="text" class="form-control">
+                    </div>
+                    <div class="input-group margin">
+                        <div class="input-group-btn">
+                            <label class="btn btn-default">请求类型</label>
+                        </div>
+                        <!-- /btn-group -->
+                        <input value="{$project_api_data.request_type_id|request_data_id}" type="text" class="form-control">
+                    </div>
+                    <div class="input-group margin">
+                        <div class="input-group-btn">
+                            <label class="btn btn-default">请求domain</label>
+                        </div>
+                        <!-- /btn-group -->
+                        <input type="text" value="{$project_api_data.url_domain}" class="form-control">
+                    </div>
+                    <div class="input-group margin">
+                        <div class="input-group-btn">
+                            <label class="btn btn-default">请求url</label>
+                        </div>
+                        <!-- /btn-group -->
+                        <input type="text" value="{$project_api_data.api_url}" class="form-control">
+                    </div>
+                    <div class="input-group margin">
+                        <div class="input-group-btn">
+                            <label class="btn btn-default">请求完整url</label>
+                        </div>
+                        <!-- /btn-group -->
+                        <input type="text" value="{$project_api_data.url_domain}{$project_api_data.api_url}" class="form-control">
+                    </div>
+                    <div class="input-group margin">
+                        <div class="input-group-btn">
+                            <label class="btn btn-default">接口描述</label>
+                        </div>
+                        <!-- /btn-group -->
+                        <input name="api_des" type="text" value="{$project_api_data.api_des}" class="form-control">
+                    </div>
+                </div><!-- /.box-body -->
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">请求参数列表</h3>
+                </div><!-- /.box-header -->
+
+                <div class="box-body">
+                    <table  class="table table-bordered">
+                        <tbody id="request">
+                        <tr>
+                            <th style="width: 200px;">参数名</th>
+                            <th style="width: 100px;">必选</th>
+                            <th style="width: 200px;">类型</th>
+                            <th>说明</th>
+                        </tr>
+                        <volist name="project_request_data" id="request">
+                            <tr>
+                                <td>
+                                    <input class="form-control" type="text" value="{$request.request_name}">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{$request.request_must}">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{$request.request_type|data_type_id}">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{$request.request_remark}">
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 10px;" class="">
+                        <label>请求json格式</label>
+                        <pre>{$project_api_data.api_parameter_json}</pre>
+                    </div>
+                </div>
+                <div class="box-header with-border">
+                    <h3 class="box-title">响应参数列表</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tbody id="back">
+                        <tr>
+                            <th style="width: 200px;">参数名</th>
+                            <th style="width: 100px;">必选</th>
+                            <th style="width: 200px;">类型</th>
+                            <th>说明</th>
+                        </tr>
+                        <volist name="project_back_data" id="back">
+                            <tr>
+                                <td>
+                                    <input class="form-control" type="text" value="{$back.back_name}">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{$back.back_must}">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{$back.back_type|data_type_id}">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{$back.back_remark}">
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 10px;" class="">
+                        <label>返回json格式</label>
+                        <pre>{$project_api_data.api_re_json}</pre>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.box -->
+        <div id="icon"></div>
+    </div>
+        </notempty>
+</block>
+<block name="js">
+    <script>
+        var height=window.innerHeight-101;
+        var left_height=window.innerHeight-50;
+        $('#body_scroll').css({'height':height});
+        $('#left_scroll').css({'height':left_height});
+    </script>
+</block>

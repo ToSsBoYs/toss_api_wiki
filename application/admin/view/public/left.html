@@ -1,0 +1,72 @@
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- 用户信息-导航 -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="{:config('admin_static')}{:cookie('user_base')['user_header_img']}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>{:cookie('user_base')['user_name']}</p>
+                <!-- Status -->
+                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+            </div>
+        </div>
+
+        <!-- 搜索框 -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="搜索...">
+          <span class="input-group-btn">
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+          </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <li class="header">导航栏</li>
+            <!-- Optionally, you can add icons to the links -->
+            <volist name="li_info" id="li_one">
+                <eq name="li_one.li_is_show" value="1"><!--判断是否显示当前一级标题-->
+                    <li class="<notempty name="li_one['li_two']">treeview</notempty>
+                    <volist name="li_one['li_two']" id="signs">
+                        <eq name="sign" value="$signs.li_sign"> active</eq>
+                    </volist>
+                    <if condition=" $li_one.li_sign eq $sign "> active</if>
+                    "><!--判断是否为二级标题-->
+                    <!--判断是否为当前子标题-->
+                    <a
+                            <notempty name="li_one['li_sign']">
+                            href="{$li_one['li_controller'].'/'.$li_one['li_function']|url}"
+                            <else />
+                            href="#"
+                            </notempty>
+                    >
+                        <i class="{$li_one.li_icon}"></i><!--图标-->
+                        <span>{$li_one.li_title}</span>
+                        <notempty name="li_one['li_two']">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </notempty><!--判断二级标题是否为空展示右侧图标-->
+                    </a>
+                    <notempty name="li_one['li_two']">
+                        <ul class="treeview-menu">
+                            <volist name="li_one['li_two']" id="li_two">
+                                <eq name="li_two.li_is_show" value="1"><!--判断是否显示当前二级标题-->
+                                    <li class="<if condition=' $li_two.li_sign eq $sign '>active</if>"><!--判断是否为当前二级标题-->
+                                    <a href="{$li_two['li_controller'].'/'.$li_two['li_function']|url}">
+                                        <i class="{$li_two.li_icon}"></i><!--图标-->
+                                        {$li_two.li_title}</a></li>
+                                </eq>
+                            </volist>
+                        </ul>
+                    </notempty>
+                    </li>
+                </eq>
+            </volist>
+        </ul><!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

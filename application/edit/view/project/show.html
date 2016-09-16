@@ -1,0 +1,343 @@
+<extend name="common@public:base_show" ></extend>
+<block name="body">
+    <notempty name='project_api_id'>
+        <div class="col-md-12">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">接口详情</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <style>
+                    .input-group-btn label{
+                        width: 150px;
+                    }
+                </style>
+                <form action="{:url('Project/show')}" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+                    <input type="hidden" name="project_api_id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+                    <input type="hidden" name="project_id" value="{$project_id}">
+                    <input type="hidden" name="project_module_id" value="{$project_module_id}">
+                    <div class="box-body">
+                        <!-- text input -->
+                        <div class="input-group margin">
+                            <div class="input-group-btn">
+                                <label class="btn btn-default">接口名称</label>
+                            </div>
+                            <!-- /btn-group -->
+                            <input name="api_name" value="{$project_api_data.api_name}" type="text" class="form-control">
+                        </div>
+                        <div class="input-group margin">
+                            <div class="input-group-btn">
+                                <label class="btn btn-default">请求类型</label>
+                            </div>
+                            <!-- /btn-group -->
+                            <select name="request_type_id" class="form-control select2">
+                                <volist id="post" name="request_data">
+                                    <option <php>if($project_api_data['request_type_id'] == $post['id']){echo "selected='selected'";}</php>  value="{$post.id}">{$post.type_name}</option>
+                                </volist>
+                            </select>
+                        </div>
+                        <div class="input-group margin">
+                            <div class="input-group-btn">
+                                <label class="btn btn-default">请求domain</label>
+                            </div>
+                            <!-- /btn-group -->
+                            <select name="project_url_id" class="form-control select2">
+                                <volist id="url" name="project_url">
+                                    <option <php>if($project_api_data['project_url_id'] == $url['id']){echo "selected='selected'";}</php>  value="{$url.id}">{$url.url_domain}</option>
+                                </volist>
+                            </select>
+                        </div>
+                        <div class="input-group margin">
+                            <div class="input-group-btn">
+                                <label class="btn btn-default">请求url</label>
+                            </div>
+                            <!-- /btn-group -->
+                            <input name="api_url" type="text" value="{$project_api_data.api_url}" class="form-control">
+                        </div>
+                        <div class="input-group margin">
+                            <div class="input-group-btn">
+                                <label class="btn btn-default">接口描述</label>
+                            </div>
+                            <!-- /btn-group -->
+                            <input name="api_des" type="text" value="{$project_api_data.api_des}" class="form-control">
+                        </div>
+                    </div><!-- /.box-body -->
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">请求参数列表</h3>
+                    </div><!-- /.box-header -->
+
+                    <div class="box-body">
+                        <table  class="table table-bordered">
+                            <tbody id="request">
+                            <tr>
+                                <th style="width: 200px;">参数名</th>
+                                <th style="width: 100px;">必选</th>
+                                <th style="width: 200px;">类型</th>
+                                <th>说明</th>
+                                <th style="padding: 0 0 0 8px;width: 70px;">
+                                    <button type="button" id="add_request" class="btn btn-primary btn-flat">新增</button>
+                                </th>
+                            </tr>
+                            <volist name="project_request_data" id="request">
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="text" name="request_name[]" value="{$request.request_name}">
+                                    </td>
+                                    <td>
+                                        <select name="request_must[]" class="form-control select2">
+                                            <option <if condition="'Y' eq $request.request_must">selected='selected'</if>  value="Y">Y</option>
+                                            <option <if condition="'N' eq $request.request_must">selected='selected'</if>  value="N">N</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="request_type[]" class="form-control select2">
+                                            <volist id="type" name="data_type">
+                                                <option <if condition="$type.id eq $request.request_type">selected='selected'</if>  value="{$type.id}">{$type.type_name}</option>
+                                            </volist>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" name="request_remark[]" value="{$request.request_remark}">
+                                    </td>
+                                    <td>
+                                        <button name="del" type="button" class="btn btn-danger btn-flat">删除</button>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 10px;" class="">
+                            <label>请求json格式</label>
+                            <textarea id="api_parameter_json" style="width:100%;" class="form-group" name="api_parameter_json">{$project_api_data.api_parameter_json}</textarea>
+                        </div>
+                    </div>
+                    <div class="box-header with-border">
+                        <h3 class="box-title">响应参数列表</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <tbody id="back">
+                            <tr>
+                                <th style="width: 200px;">参数名</th>
+                                <th style="width: 100px;">必选</th>
+                                <th style="width: 200px;">类型</th>
+                                <th>说明</th>
+                                <th style="padding: 0 0 0 8px;width: 70px;">
+                                    <button type="button" id="add_back" class="btn btn-primary btn-flat">新增</button>
+                                </th>
+                            </tr>
+                            <volist name="project_back_data" id="back">
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="text" name="back_name[]" value="{$back.back_name}">
+                                    </td>
+                                    <td>
+                                        <select name="back_must[]" class="form-control select2">
+                                            <option <if condition="'Y' eq $back.back_must">selected='selected'</if>  value="Y">Y</option>
+                                            <option <if condition="'N' eq $back.back_must">selected='selected'</if>  value="N">N</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="back_type[]" class="form-control select2">
+                                            <volist id="type" name="data_type">
+                                                <option <if condition="$type.id eq $back.back_type">selected='selected'</if>  value="{$type.id}">{$type.type_name}</option>
+                                            </volist>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" name="back_remark[]" value="{$back.back_remark}">
+                                    </td>
+                                    <td>
+                                        <button name="del" type="button" class="btn btn-danger btn-flat">删除</button>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 10px;" class="">
+                            <label>返回json格式</label>
+                            <textarea id="api_re_json" style="width:100%;" class="form-group" name="api_re_json">{$project_api_data.api_re_json}</textarea>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary pull-right btn-flat"><i class="fa fa-save"></i> 更新</button>
+                    </div><!-- /.box-footer -->
+                </form>
+            </div><!-- /.box -->
+            <div id="icon"></div>
+        </div>
+    </notempty>
+
+
+</block>
+<block name="js">
+    <script>
+        var js_date_type={$js_data_type};
+        var date_type='';
+        var height=window.innerHeight-101;
+        var left_height=window.innerHeight-50;
+        $('#body_scroll').css({'height':height});
+        $('#left_scroll').css({'height':left_height});
+        $.each(js_date_type, function(k,v) {
+            if(k == 0){
+                date_type+='<option selected="selected" value="'+v.id+'">'+v.type_name+'</option>';
+            }else{
+                date_type+='<option value="'+v.id+'">'+v.type_name+'</option>';
+            }
+        });
+        $('#add_request').click(function () {
+            $('#request').append(
+            '<tr>'+
+                '<td>'+
+                    '<input class="form-control" type="text" name="request_name[]" value="">'+
+                '</td>'+
+                '<td>'+
+                    '<select name="request_must[]" class="form-control select2">'+
+                        '<option selected="selected" value="Y">Y</option>'+
+                        '<option  value="N">N</option>'+
+                    '</select>'+
+                '</td>'+
+                '<td>'+
+                    '<select name="request_type[]" class="form-control select2">'+
+                        date_type+
+                    '</select>'+
+                '</td>'+
+                '<td>'+
+                    '<input class="form-control" type="text" name="request_remark[]" value="">'+
+                '</td>'+
+                '<td>'+
+                    '<button name="del" type="button" class="btn btn-danger btn-flat">删除</button>'+
+                '</td>'+
+            '</tr>'
+            );
+            $('[name="request_must[]"]').select2({
+
+            });
+            $('[name="request_type[]"]').select2({
+
+            });
+
+        });
+        $('#add_back').click(function () {
+            $('#back').append(
+                    '<tr>'+
+                    '<td>'+
+                    '<input class="form-control" type="text" name="back_name[]" value="">'+
+                    '</td>'+
+                    '<td>'+
+                    '<select name="back_must[]" class="form-control select2">'+
+                    '<option selected="selected" value="Y">Y</option>'+
+                    '<option  value="N">N</option>'+
+                    '</select>'+
+                    '</td>'+
+                    '<td>'+
+                    '<select name="back_type[]" class="form-control select2">'+
+                    date_type+
+                    '</select>'+
+                    '</td>'+
+                    '<td>'+
+                    '<input class="form-control" type="text" name="back_remark[]" value="">'+
+                    '</td>'+
+                    '<td>'+
+                    '<button name="del" type="button" class="btn btn-danger btn-flat">删除</button>'+
+                    '</td>'+
+                    '</tr>'
+            );
+            $('[name="back_must[]"]').select2({
+
+            });
+            $('[name="back_type[]"]').select2({
+
+            });
+
+        });
+        $("body").on('click', '[name="del"]', function(){
+            $(this).parent().parent().remove();
+        });
+
+        $("[data-reveal-id='cate_edit']").click(function () {
+            var cate_id=$(this).attr('cate_id');
+            var cate_name=$(this).attr('cate_name');
+            $('[name="cate_id"]').val(cate_id);
+            $('[name="cate_name"]').val(cate_name);
+        });
+
+        $("[data-reveal-id='module_edit']").click(function () {
+            var model_id=$(this).attr('model_id');
+            var model_name=$(this).attr('model_name');
+            $('[name="module_id"]').val(model_id);
+            $('[name="model_name"]').val(model_name);
+        });
+
+        /**
+         * 文本框根据输入内容自适应高度
+         * @param                {HTMLElement}        输入框元素
+         * @param                {Number}                设置光标与输入框保持的距离(默认0)
+         * @param                {Number}                设置最大高度(可选)
+         */
+        var autoTextarea = function (elem, extra, maxHeight) {
+            extra = extra || 0;
+            var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
+                    isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
+                    addEvent = function (type, callback) {
+                        elem.addEventListener ? elem.addEventListener(type, callback, false) : elem.attachEvent('on' + type, callback);
+                    },
+                    getStyle = elem.currentStyle ? function (name) {
+                        var val = elem.currentStyle[name];
+                        if (name === 'height' && val.search(/px/i) !== 1) {
+                            var rect = elem.getBoundingClientRect();
+                            return rect.bottom - rect.top -
+                                    parseFloat(getStyle('paddingTop')) -
+                                    parseFloat(getStyle('paddingBottom')) + 'px';
+                        };
+                        return val;
+                    } : function (name) {
+                        return getComputedStyle(elem, null)[name];
+                    },
+                    minHeight = parseFloat(getStyle('height'));
+//            elem.style.resize = 'none';//拖动伸缩
+            var change = function () {
+                var scrollTop, height,
+                        padding = 0,
+                        style = elem.style;
+                if (elem._length === elem.value.length) return;
+                elem._length = elem.value.length;
+                if (!isFirefox && !isOpera) {
+                    padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));
+                };
+                scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                elem.style.height = minHeight + 'px';
+                if (elem.scrollHeight > minHeight) {
+                    if (maxHeight && elem.scrollHeight > maxHeight) {
+                        height = maxHeight - padding;
+                        style.overflowY = 'auto';
+                    } else {
+                        height = elem.scrollHeight - padding;
+//                        style.overflowY = 'hidden';
+                        style.overflowY = 'auto';
+                    };
+                    style.height = height + extra + 'px';
+                    scrollTop += parseInt(style.height) - elem.currHeight;
+                    document.body.scrollTop = scrollTop;
+                    document.documentElement.scrollTop = scrollTop;
+                    elem.currHeight = parseInt(style.height);
+                };
+            };
+
+            addEvent('propertychange', change);
+//            addEvent('input', change);
+            addEvent('focus', change);
+            change();
+        };
+        var api_parameter_json = document.getElementById("api_parameter_json");
+        autoTextarea(api_parameter_json,10);//调用
+        var api_re_json = document.getElementById("api_re_json");
+        autoTextarea(api_re_json,10);//调用
+
+
+    </script>
+</block>

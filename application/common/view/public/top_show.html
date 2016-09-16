@@ -1,0 +1,50 @@
+<header class="main-header">
+    <!-- Logo -->
+    <a href="{:url('Index/index')}" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>api</b>/文档v0.1</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>api</b>文档v0.1</span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <volist id="vo" name="project_module_data">
+                    <li <if condition="$vo['id'] eq $project_module_id">class="active"</if> >
+                        <a style="padding-right: 0px;" href="{:url('project/show',['project_module_id'=>$vo['id'],'project_id'=>$project_id])}">
+                            {$vo.model_name}
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a style="border-left: none;font-size: 17px;" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-angle-double-down"></i>
+                        </a>
+                        <ul class="dropdown-menu xiala" role="menu">
+                            <li><a data-reveal-id="module_edit" model_name="{$vo.model_name}" model_id="{$vo.id}" href="#">修改</a></li>
+                            <li><a onclick="return confirm('是否确认删除？');"  href="{:url('module/del',['project_module_id'=>$vo['id'],'project_id'=>$project_id])}">删除</a></li>
+                        </ul>
+                    </li>
+                </volist>
+                <li>
+                    <a data-reveal-id="module_add" href="#">
+                        <i style="font-size: 17px;" class="fa  fa-plus"></i>
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {:cookie('user_base')['user_name']}
+                        <img src="{:config('admin_static')}{:cookie('user_base')['user_header_img']}" style="float: left;width: 25px;height: 25px;border-radius: 50%;margin-right: 10px;margin-top: -2px;" alt="User Image">
+                    </a>
+                    <ul class="dropdown-menu xiala" role="menu">
+                        <!--<li class="divider"></li>-->
+                        <li><a  href="{:url('user/logout')}">退出</a></li>
+                        <!--<li class="divider"></li>-->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

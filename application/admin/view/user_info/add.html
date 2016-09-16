@@ -1,0 +1,51 @@
+<extend name="public:base_one" />
+<block name="body">
+<div class="col-md-12">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">用户信息添加</h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form action="{:url('UserInfo/add')}"  enctype="multipart/form-data" method="post">
+            <div class="box-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" name="user_name" class="form-control" placeholder="用户名" >
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="password" name="user_password" class="form-control" placeholder="密码" >
+                </div>
+                <div class="form-group">
+                    <label>确认密码</label>
+                    <input type="password" name="re_user_password" class="form-control" placeholder="确认密码" >
+                </div>
+                <div class="form-group">
+                    <label>所属权限组</label>
+                    <select name="user_group" class="form-control select2">
+                        <option value="0">无</option>
+                        <volist name="auth_group" id="vo"}
+                            <option value="{$vo.id}">{$vo.title}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>是否启用</label>
+                    <input type="radio" name="status" value="1" class="minimal" checked>
+                    启用
+                    <input type="radio" name="status" value="0" class="minimal">
+                    禁用
+                </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <a href="{:url('UserInfo/index')}"><button type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i> 取消</button></a>
+                <button type="submit" class="btn btn-primary pull-right btn-flat"><i class="fa fa-save"></i> 更新</button>
+            </div><!-- /.box-footer -->
+        </form>
+    </div><!-- /.box -->
+    <div id="icon"></div>
+
+</div>
+</block>

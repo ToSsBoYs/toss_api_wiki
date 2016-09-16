@@ -1,0 +1,50 @@
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <volist id="left" name="left_data">
+                <li class="treeview active">
+                    <span style="color: #000;background: #f4f4f5;font-weight: 600;border-left: 3px solid transparent;position: relative;padding: 12px 5px 12px 15px;display: block;" >
+                        <span>{$key}</span>
+
+                        <span style="margin: 0px;font-size: 100%" class="label label-danger pull-right">Del</span>
+                        <span style="margin: 0px;font-size: 100%;margin-right: 5px;" class="label label-primary pull-right">Edit</span>
+                        <!--<i class="fa fa-angle-double-down pull-right"></i>-->
+                    </span>
+                    <ul class="treeview-menu">
+                        <volist id="wiki_left" name="left['project_api']">
+                            <li <if condition="$project_api_id eq $wiki_left.id">class="active"</if>>
+                            <span style="    padding: 5px 5px 5px 15px;display: block;font-size: 14px;">
+                             <a href="{:url('project/show',['project_module_id'=>$project_module_id,'project_id'=>$project_id,'project_api_id'=>$wiki_left['id']])}">
+                                    <i class="fa fa-circle-o"></i>
+                                    {$wiki_left.api_name}
+                             </a>
+                            <span style="margin: 0px;font-size: 75%" class="badge bg-light-blue pull-right">Del</span>
+                            <span style="margin: 0px;font-size: 75%;margin-right: 5px;" class="badge bg-light-blue pull-right">Edit</span>
+                            </span>
+
+                            </li>
+                        </volist>
+                        <li>
+                            <a  style="color: red;" href="{:url('project/add',['cate_id'=>$left['cate_id']])}">
+                                <i class="fa  fa-plus"></i>
+                                新增接口
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </volist>
+            <li class="treeview active">
+                    <span style="color: #000;background: #f4f4f5;font-weight: 600;border-left: 3px solid transparent;position: relative;padding: 12px 5px 12px 15px;display: block;">
+                        <a style="color: red;" href="{:url('project/add_cate',['project_module_id'=>$project_module_id,'project_id'=>$project_id])}">
+                            <i class="fa  fa-plus"></i>
+                            新增分类
+                        </a>
+                    </span>
+            </li>
+        </ul><!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

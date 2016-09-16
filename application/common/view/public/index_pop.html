@@ -1,0 +1,71 @@
+<!--新增项目弹出层-->
+<div class="box box-info reveal-modal"  id="project_add">
+    <div class="box-header with-border">
+        <h3 class="box-title">新增项目</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form action="{:url('project/project_add')}" class="form-horizontal" method="post">
+        <div class="box-body">
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">项目名称</label>
+                <div class="col-sm-9">
+                    <input type="text" name="project_name" class="form-control" placeholder="项目名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">项目简介</label>
+                <div class="col-sm-9">
+                    <input type="text" name="project_about" class="form-control" placeholder="项目简介">
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">项目图标</label>
+                <div class="col-sm-9">
+                    <input type="text" name="project_icon" class="form-control" placeholder="项目图标">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-info pull-right">新增</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>
+
+<div class="box box-info reveal-modal"  id="project_edit">
+    <div class="box-header with-border">
+        <h3 class="box-title">修改项目</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form action="{:url('project/project_edit')}" class="form-horizontal" method="post">
+        <div class="box-body">
+            <input type="hidden" name="project_id" value="">
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">项目名称</label>
+                <div class="col-sm-9">
+                    <input type="text" name="project_name" class="form-control" placeholder="项目名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">项目简介</label>
+                <div class="col-sm-9">
+                    <input type="text" name="project_about" class="form-control" placeholder="项目简介">
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">项目图标</label>
+                <div class="col-sm-9">
+                    <input type="text" name="project_icon" class="form-control" placeholder="项目图标">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-info pull-right">修改</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>

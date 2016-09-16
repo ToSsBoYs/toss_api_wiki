@@ -1,0 +1,149 @@
+<extend name="public:base_one" />
+<block name="body">
+    <style>
+        .table>tbody>tr>td{line-height: 1;}
+    </style>
+    <div class="col-md-12">
+        <!-- Horizontal Form -->
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">权限设置</h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            <form action="{:url('AuthGroup/rule_show')}"  enctype="multipart/form-data" method="post">
+                <input type="hidden" name="id" value="{$id}">
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th style="width: 200px;">一级菜单</th>
+                            <th style="width: 200px;">二级菜单</th>
+                            <th>权限名称</th>
+                            <th>权限规则</th>
+                            <th style="width: 120px;">操作</th>
+                        </tr>
+                        <volist id="vo" name="rules">
+                            <if condition="$vo.status eq 2 ">
+                                <tr>
+                                    <td>
+                                        <button style="padding: 0px 0px 0px 0px;line-height: 18px;" type="button" class="btn btn-info btn-flat">
+                                            <i erji_fu="{$vo.one_id}" style="width: 18px;" class="fa fa-plus"></i>
+                                        </button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input
+                                        <volist id="two_title1" name="vo['li_two']">
+                                            <volist id="vo4" name="two_title1['rules']">
+                                                <if condition="in_array($vo4['rule_id'],$rule_is)">checked='checked'<php>break;</php></if>
+                                            </volist>
+                                        </volist>
+                                        type="checkbox" class="flat-red" >
+                                        <label>{$vo.one_title}</label>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <!--设置二级checkbox-->
+                                <volist id="two_title" name="vo['li_two']">
+                                    <tr erji_tr="{$vo.one_id}" style="display: none;">
+                                        <td></td>
+                                        <td>
+                                            <button style="padding: 0px 0px 0px 0px;line-height: 18px;" type="button" class="btn btn-info btn-flat">
+                                                <i erji_zhankai="{$vo.one_id}" zhankai="{$two_title.two_id}" style="width: 18px;" class="fa fa-plus"></i>
+                                            </button>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input
+                                            <volist id="vo2" name="two_title['rules']">
+                                                <if condition="in_array($vo2['rule_id'],$rule_is)">checked='checked'<php>break;</php></if>
+                                            </volist>
+                                            name="two_title" erji_status="{$two_title.two_id}" sanji_fu="{$two_title.two_id}" type="checkbox" class="flat-red" value="{$two_title.two_id}">
+                                            <label>{$two_title.two_title}</label>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <!--三级checkbox权限详情-->
+                                    <volist id="two_rule" name="two_title['rules']">
+                                        <tr erji_tr_shou="{$vo.one_id}" style="display: none;" sanji_tr="{$two_title.two_id}">
+                                            <td></td>
+                                            <td></td>
+                                            <td><label>{$two_rule.rule_title}</label></td>
+                                            <td>
+                                                <input <if condition="in_array($two_rule['rule_id'],$rule_is)">checked='checked'</if> sanji_zi="{$two_title.two_id}" type="checkbox" name="rule_id[{$two_rule.rule_id}]" class="flat-red" value="{$two_rule.rule_id}">
+                                                <label>{$two_rule.rule_name}</label>
+                                            </td>
+                                            <td>
+                                                <div style="width: 100px;">
+                                                    <a target="_blank" href="{:url('Auth/edit',array('id'=>$two_rule['rule_id']))}">
+                                                        <button style="width: 50px; float: left;" type="button" class="btn btn-block bg-light-blue btn-flat">编辑</button>
+                                                    </a>
+                                                    <a onclick="return confirm('是否确认删除？');" href="{:url('Auth/del',array('id'=>$two_rule['rule_id']))}">
+                                                        <button style="width: 50px;" type="button" class="btn btn-block bg-red btn-flat">删除</button>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </volist>
+                                </volist>
+                                <else/>
+                                <!--无二级菜单设置-->
+                                <tr>
+                                    <td>
+                                        <button style="padding: 0px 0px 0px 0px;line-height: 18px;" type="button" class="btn btn-info btn-flat">
+                                            <i  zhankai="{$vo.one_id}" style="width: 18px;" class="fa fa-plus"></i>
+                                        </button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input
+                                        <volist id="vo3" name="vo['rules']">
+                                            <if condition="in_array($vo3['rule_id'],$rule_is)">checked='checked'<php>break;</php></if>
+                                        </volist>
+                                        sanji_fu="{$vo.one_id}" type="checkbox" class="flat-red" value="{$vo.one_id}">
+                                        <label>{$vo.one_title}</label>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <volist id="one_rules" name="vo['rules']">
+                                    <tr sanji_tr="{$vo.one_id}" style="display: none;">
+                                        <td></td>
+                                        <td></td>
+                                        <td><label>{$one_rules.rule_title}</label></td>
+                                        <td>
+                                            <input <if condition="in_array($one_rules['rule_id'],$rule_is)">checked='checked'</if> sanji_zi="{$vo.one_id}" type="checkbox" name="rule_id[{$one_rules.rule_id}]" class="flat-red" value="{$one_rules.rule_id}">
+                                            <label>{$one_rules.rule_name}</label>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100px;">
+                                                <a target="_blank" href="{:url('Auth/edit',array('id'=>$one_rules['rule_id']))}">
+                                                    <button style="width: 50px; float: left;" type="button" class="btn btn-block bg-light-blue btn-flat">编辑</button>
+                                                </a>
+                                                <a onclick="return confirm('是否确认删除？');" href="{:url('Auth/del',array('id'=>$one_rules['rule_id']))}">
+                                                    <button style="width: 50px;" type="button" class="btn btn-block bg-red btn-flat">删除</button>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </if>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <a href="{:url('AuthGroup/index')}"><button type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i> 取消</button></a>
+                    <button type="submit" class="btn btn-primary pull-right btn-flat"><i class="fa fa-save"></i> 设置</button>
+                </div><!-- /.box-footer -->
+            </form>
+        </div><!-- /.box -->
+        <div id="icon"></div>
+
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="{:config('admin_static')}/js/auth.js"></script>
+</block>

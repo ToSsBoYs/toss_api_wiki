@@ -1,0 +1,28 @@
+<extend name="common@public:base_view" ></extend>
+<block name="body">
+    <div class="row">
+
+        <volist id="vo" name="data">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div style=" box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.37);" class="small-box {:color()}">
+                    <a href="{:url('project/show',['project_id'=>$vo['id']])}">
+                        <div style="color: rgb(59, 59, 59);padding: 10px;" class="inner">
+                            <h3>{$vo.project_name}</h3>
+                            <p>{$vo.project_about}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="{$vo.project_icon}"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="small-box-footer">
+                        查看文档
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </volist>
+        <!-- ./col -->
+    </div>
+</block>

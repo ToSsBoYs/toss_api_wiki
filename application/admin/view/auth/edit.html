@@ -1,0 +1,98 @@
+<extend name="public:base_one" />
+<block name="body">
+<div class="col-md-12">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">权限信息编辑</h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form action="{:url('Auth/edit')}"  enctype="multipart/form-data" method="post">
+            <input type="hidden" name="id" value="{$data.id}">
+            <div class="box-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>标题（必填）</label>
+                    <input type="text" name="title" class="form-control" value="{$data.title}" placeholder="输入..." >
+                </div>
+                <div class="form-group">
+                    <label>规则模块（必填）</label>
+                    <input type="text" name="module" class="form-control" value="{$data.module}" placeholder="输入..." >
+                </div>
+                <div class="form-group">
+                    <label>规则控制器（必填）</label>
+                    <input type="text" name="controller" class="form-control" value="{$data.controller}" placeholder="输入..." >
+                </div>
+                <div class="form-group">
+                    <label>规则方法（必填）</label>
+                    <input type="text" name="function" class="form-control" value="{$data.function}" placeholder="输入..." >
+                </div>
+                <div class="form-group">
+                    <label>附加条件</label>
+                    <input type="text" name="condition" class="form-control" value="{$data.condition}" placeholder="输入..." >
+                </div>
+                <div class="form-group">
+                    <label>所属一级菜单</label>
+                    <select id="one" name="one_id" class="form-control select2">
+                        <option value="0">无</option>
+                        <foreach name="li_info" item="vo" key="k" }
+                            <option <if condition="$vo.id eq $data.one_id ">selected = "selected"</if> value="{$vo.id}">{$vo.li_title}</option>
+                        </foreach>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>所属二级菜单</label>
+                    <select id="two" name="two_id" class="form-control select2">
+                        <option value="0">无</option>
+                        <foreach name="li_info" item="vo" key="k" >
+                            <if condition="$vo.id eq $data.one_id ">
+                                <foreach name="vo['li_two']" item="vo1" key="k1" >
+                                    <option <if condition="$vo1.id eq $data.two_id ">selected = "selected"</if> value="{$vo1.id}">{$vo1.li_title}</option>
+                                </foreach>
+                            </if>
+                        </foreach>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>是否启用</label>
+                    <input type="radio" name="status" value="1" class="minimal" <if condition="$data.status eq 1">checked</if>>
+                    启用
+                    <input type="radio" name="status" value="0" class="minimal" <if condition="$data.status eq 0">checked</if>>
+                    禁用
+                </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <a href="{:url('Auth/index')}"><button type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i> 取消</button></a>
+                <button type="submit" class="btn btn-primary pull-right btn-flat"><i class="fa fa-save"></i> 更新</button>
+            </div><!-- /.box-footer -->
+        </form>
+    </div><!-- /.box -->
+    <div id="icon"></div>
+
+</div>
+</block>
+<block name="js">
+    <script>
+        //菜单联动
+        var li_info = {$js_li_info};
+        $('#one').change(function(){
+            $('#two').empty();
+            $('#select2-two-container').empty();
+            $('#select2-two-container').append('无');
+            $('#two').append(
+                    "<option value='0'>无</option>"
+            );
+            var did=$('#one').val();
+            $.each(li_info,function(k,v){
+                if(v.id==did){
+                    $.each(li_info[k]['li_two'],function(n,value) {
+                        var str="<option value='"+value.id+"'>"+value.li_title+"</option>"
+                        $('#two').append(
+                                str
+                        );
+                    });
+                }
+            });
+        });
+    </script>
+</block>

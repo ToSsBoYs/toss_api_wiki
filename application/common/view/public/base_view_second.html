@@ -1,0 +1,28 @@
+<include file="common@public/header"/>
+<block name="css"></block>
+<body class="hold-transition skin-black-light sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <block name="top"><include file="common@public/top_view" /></block>
+    <!-- Left side column. contains the logo and sidebar -->
+    <block name="left"><include file="common@public/left_view" /></block>
+    <!-- Content Wrapper. Contains page content -->
+    <!--<div id="body_height"  class="content-wrapper">-->
+    <!-- 标题栏 -->
+
+    <!-- Main content -->
+    <section id="body_scroll" style="margin-left:230px;overflow: scroll;overflow-x:hidden" class="content">
+        <div  class="row">
+            <block name="body">
+                <!-- 主页面 -->
+            </block>
+        </div>
+    </section>
+    <!--</div>-->
+    <!-- Main Footer -->
+    <include file="common@public/foot" />
+</div>
+</body>
+<include file="common@public/js" />
+<block name="js"></block>
+</html>

@@ -1,0 +1,106 @@
+<!--新增分类弹出层-->
+<div class="box box-info reveal-modal"  id="add_cate">
+    <div class="box-header with-border">
+        <h3 class="box-title">新增分类</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form action="{:url('cate/add')}" class="form-horizontal" method="post">
+        <input type="hidden" name="project_api_id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+        <input type="hidden" name="project_id" value="{$project_id}">
+        <input type="hidden" name="project_module_id" value="<notempty name='project_module_id'>{$project_module_id}</notempty>">
+        <div class="box-body">
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">分类名称</label>
+                <div class="col-sm-9">
+                    <input type="text" name="cate_name" class="form-control" placeholder="分类名">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-info pull-right">新增</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>
+<!--修改分类弹出层-->
+<div class="box box-info reveal-modal"  id="cate_edit">
+    <div class="box-header with-border">
+        <h3 class="box-title">修改分类</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form action="{:url('cate/edit')}" class="form-horizontal" method="post">
+        <input type="hidden" name="project_api_id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+        <input type="hidden" name="project_id" value="{$project_id}">
+        <input type="hidden" name="project_module_id" value="<notempty name='project_module_id'>{$project_module_id}</notempty>">
+        <input type="hidden" name="cate_id" value="">
+        <div class="box-body">
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">分类名称</label>
+                <div class="col-sm-9">
+                    <input type="text" name="cate_name" class="form-control" placeholder="分类名">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-info pull-right">修改</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>
+<!--新增模块弹出层-->
+<div class="box box-info reveal-modal"  id="module_add">
+    <div class="box-header with-border">
+        <h3 class="box-title">新增模块</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form action="{:url('module/add')}" class="form-horizontal" method="post">
+        <input type="hidden" name="project_api_id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+        <input type="hidden" name="project_id" value="{$project_id}">
+        <input type="hidden" name="project_module_id" value="<notempty name='project_module_id'>{$project_module_id}</notempty>">
+        <div class="box-body">
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">模块名称</label>
+                <div class="col-sm-9">
+                    <input type="text" name="model_name" class="form-control" placeholder="模块名">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-info pull-right">新增</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>
+<!--修改模块弹出层-->
+<div class="box box-info reveal-modal"  id="module_edit">
+    <div class="box-header with-border">
+        <h3 class="box-title">修改模块</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form action="{:url('module/edit')}" class="form-horizontal" method="post">
+        <input type="hidden" name="project_api_id" value="<notempty name='project_api_data.id'>{$project_api_data.id}</notempty>">
+        <input type="hidden" name="project_id" value="{$project_id}">
+        <input type="hidden" name="module_id" value="">
+        <input type="hidden" name="now_module_id" value="<notempty name='project_module_id'>{$project_module_id}</notempty>">
+        <div class="box-body">
+            <div class="form-group">
+                <label style="float:left;margin-left: 8px;"  class="control-label">模块名称</label>
+                <div class="col-sm-9">
+                    <input type="text" name="model_name" class="form-control" placeholder="模块名">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-info pull-right">修改</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>
