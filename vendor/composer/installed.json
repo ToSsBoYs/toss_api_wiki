@@ -140,12 +140,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d"
+            "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/polyfill-mbstring/8a6bdec191138e01c92ae026e5aacb7b3e66267d.zip",
-            "reference": "8a6bdec191138e01c92ae026e5aacb7b3e66267d",
+            "url": "https://packagist.phpcomposer.com/files/symfony/polyfill-mbstring/53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c.zip",
+            "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c",
             "shasum": ""
         },
         "require": {
@@ -154,7 +154,7 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2016-06-29 14:58:48",
+        "time": "2016-08-30 17:06:17",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -201,12 +201,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/http-foundation.git",
-            "reference": "472367d63660b5f1426b33b87ba0558b3487945a"
+            "reference": "8818fa9f67955aba87cf82b0e3c9e5411813cd3f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/symfony/http-foundation/472367d63660b5f1426b33b87ba0558b3487945a.zip",
-            "reference": "472367d63660b5f1426b33b87ba0558b3487945a",
+            "url": "https://packagist.phpcomposer.com/files/symfony/http-foundation/8818fa9f67955aba87cf82b0e3c9e5411813cd3f.zip",
+            "reference": "8818fa9f67955aba87cf82b0e3c9e5411813cd3f",
             "shasum": ""
         },
         "require": {
@@ -216,7 +216,7 @@
         "require-dev": {
             "symfony/expression-language": "~2.8|~3.0"
         },
-        "time": "2016-08-16 16:09:30",
+        "time": "2016-09-14 20:47:40",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -484,12 +484,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/guzzle/guzzle.git",
-            "reference": "3b45e7675e8997ac96142b0265d158343958f708"
+            "reference": "113071af3b2b9eb96b05dab05472cbaed64a3df4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/guzzle/guzzle/3b45e7675e8997ac96142b0265d158343958f708.zip",
-            "reference": "3b45e7675e8997ac96142b0265d158343958f708",
+            "url": "https://packagist.phpcomposer.com/files/guzzle/guzzle/113071af3b2b9eb96b05dab05472cbaed64a3df4.zip",
+            "reference": "113071af3b2b9eb96b05dab05472cbaed64a3df4",
             "shasum": ""
         },
         "require": {
@@ -502,7 +502,7 @@
             "phpunit/phpunit": "^4.0",
             "psr/log": "^1.0"
         },
-        "time": "2016-08-04 00:05:49",
+        "time": "2016-09-12 15:07:23",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -610,58 +610,6 @@
         "keywords": [
             "cache",
             "caching"
-        ]
-    },
-    {
-        "name": "overtrue/socialite",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/overtrue/socialite.git",
-            "reference": "0582aa49d8298072ef4e726c1d7cd6824df4b8aa"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/overtrue/socialite/0582aa49d8298072ef4e726c1d7cd6824df4b8aa.zip",
-            "reference": "0582aa49d8298072ef4e726c1d7cd6824df4b8aa",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/guzzle": "~5.0|~6.0",
-            "php": ">=5.4.0",
-            "symfony/http-foundation": "~2.6|~2.7|~2.8|~3.0"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9",
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2016-07-07 03:40:26",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Overtrue\\Socialite\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "overtrue",
-                "email": "anzhengchao@gmail.com"
-            }
-        ],
-        "description": "A collection of OAuth 2 packages that extracts from laravel/socialite.",
-        "keywords": [
-            "login",
-            "oauth",
-            "qq",
-            "social",
-            "wechat",
-            "weibo"
         ]
     },
     {
@@ -800,18 +748,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/silexphp/Pimple.git",
-            "reference": "64e0f8320639b434baa073a40dd1e037e3286555"
+            "reference": "44515c40a4c4effc53c1e6c0e7158f711473dc98"
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/silexphp/Pimple/64e0f8320639b434baa073a40dd1e037e3286555.zip",
-            "reference": "64e0f8320639b434baa073a40dd1e037e3286555",
+            "url": "https://packagist.phpcomposer.com/files/silexphp/Pimple/44515c40a4c4effc53c1e6c0e7158f711473dc98.zip",
+            "reference": "44515c40a4c4effc53c1e6c0e7158f711473dc98",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2015-09-11 15:11:22",
+        "time": "2016-09-10 19:36:25",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -902,18 +850,70 @@
         ]
     },
     {
+        "name": "overtrue/socialite",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/overtrue/socialite.git",
+            "reference": "6e43e0af13057d8daaf619e16779d4e675538a87"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://packagist.phpcomposer.com/files/overtrue/socialite/6e43e0af13057d8daaf619e16779d4e675538a87.zip",
+            "reference": "6e43e0af13057d8daaf619e16779d4e675538a87",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "~5.0|~6.0",
+            "php": ">=5.4.0",
+            "symfony/http-foundation": "~2.6|~2.7|~2.8|~3.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9",
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2016-09-06 04:09:04",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Overtrue\\Socialite\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "overtrue",
+                "email": "anzhengchao@gmail.com"
+            }
+        ],
+        "description": "A collection of OAuth 2 packages that extracts from laravel/socialite.",
+        "keywords": [
+            "login",
+            "oauth",
+            "qq",
+            "social",
+            "wechat",
+            "weibo"
+        ]
+    },
+    {
         "name": "topthink/framework",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/top-think/framework.git",
-            "reference": "6622c9698de21c3a486b967e600222179c456390"
+            "reference": "8ff2e4fe5bdf955f5fd4206ef066ee50d667577f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/top-think/framework/6622c9698de21c3a486b967e600222179c456390.zip",
-            "reference": "6622c9698de21c3a486b967e600222179c456390",
+            "url": "https://packagist.phpcomposer.com/files/top-think/framework/8ff2e4fe5bdf955f5fd4206ef066ee50d667577f.zip",
+            "reference": "8ff2e4fe5bdf955f5fd4206ef066ee50d667577f",
             "shasum": ""
         },
         "require": {
@@ -929,7 +929,7 @@
             "sebastian/phpcpd": "2.*",
             "squizlabs/php_codesniffer": "2.*"
         },
-        "time": "2016-08-20 14:04:39",
+        "time": "2016-09-15 11:52:22",
         "type": "think-framework",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",

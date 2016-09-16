@@ -11,6 +11,7 @@
 
 namespace Overtrue\Socialite\Providers;
 
+use InvalidArgumentException;
 use Overtrue\Socialite\AccessToken;
 use Overtrue\Socialite\AccessTokenInterface;
 use Overtrue\Socialite\ProviderInterface;
@@ -40,6 +41,13 @@ class WeChatProvider extends AbstractProvider implements ProviderInterface
      * {@inheritdoc}.
      */
     protected $scopes = ['snsapi_login'];
+
+    /**
+     * Indicates if the session state should be utilized.
+     *
+     * @var bool
+     */
+    protected $stateless = true;
 
     /**
      * {@inheritdoc}.
@@ -75,7 +83,7 @@ class WeChatProvider extends AbstractProvider implements ProviderInterface
             'redirect_uri'  => $this->redirectUrl,
             'response_type' => 'code',
             'scope'         => $this->formatScopes($this->scopes, $this->scopeSeparator),
-            'state'         => $state,
+            'state'         => $state ?: md5(time()),
         ];
     }
 
@@ -96,6 +104,10 @@ class WeChatProvider extends AbstractProvider implements ProviderInterface
 
         if (in_array('snsapi_base', $scopes)) {
             return $token->toArray();
+        }
+
+        if (empty($token['openid'])) {
+            throw new InvalidArgumentException('openid of AccessToken is required.');
         }
 
         $response = $this->getHttpClient()->get($this->baseUrl.'/userinfo', [
@@ -166,8 +178,8 @@ class WeChatProvider extends AbstractProvider implements ProviderInterface
     protected function removeCallback($response)
     {
         if (strpos($response, 'callback') !== false) {
-            $lpos     = strpos($response, '(');
-            $rpos     = strrpos($response, ')');
+            $lpos = strpos($response, '(');
+            $rpos = strrpos($response, ')');
             $response = substr($response, $lpos + 1, $rpos - $lpos - 1);
         }
 

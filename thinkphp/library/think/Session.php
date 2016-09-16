@@ -115,6 +115,7 @@ class Session
             self::init();
         } elseif (false === self::$init) {
             session_start();
+            self::$init = true;
         }
     }
 
@@ -175,6 +176,23 @@ class Session
             }
         }
         return $value;
+    }
+
+    /**
+     * session获取并删除
+     * @param string        $name session名称
+     * @param string|null   $prefix 作用域（前缀）
+     * @return mixed
+     */
+    public static function pull($name, $prefix = null)
+    {
+        $result = self::get($name, $prefix);
+        if ($result) {
+            self::delete($name, $prefix);
+            return $result;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -245,6 +263,7 @@ class Session
     public static function start()
     {
         session_start();
+        self::$init = true;
     }
 
     /**
