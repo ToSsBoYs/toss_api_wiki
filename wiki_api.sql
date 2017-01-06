@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : 灵境115.159.211.198
-Source Server Version : 50711
-Source Host           : 115.159.211.198:3306
-Source Database       : wiki_api
-
-Target Server Type    : MYSQL
-Target Server Version : 50711
-File Encoding         : 65001
-
-Date: 2016-09-16 16:35:48
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
